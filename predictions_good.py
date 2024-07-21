@@ -11,8 +11,8 @@ from tqdm import tqdm
 # Configuration parameters
 class Config:
     model_path = "./model_3d_opti.pth"  # Change to your model path
-    input_dir = "./training/source/"  # Change to your input images directory
-    output_dir = "./predictions"  # Change to your output directory
+    input_dir = "../all_images/"  # Change to your input images directory
+    output_dir = "../predictions"  # Change to your output directory
     batch_size = 1
     target_shape = 64
     downsampling_factor = 2  # Use the same downsampling factor as during training
