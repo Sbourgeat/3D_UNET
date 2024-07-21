@@ -1,0 +1,42 @@
+program: sweep_v3_accumulation.py  # your training script
+method: bayes  # Bayesian optimization
+metric:
+  name: val_dice  # validation accuracy
+  goal: maximize  # maximize accuracy
+
+parameters:
+  batch_size:
+    distribution: int_uniform
+    min: 1
+    max: 20
+  learning_rate:
+    distribution: log_uniform_values
+    min: 1e-4
+    max: 1e-2
+  dropout:
+    distribution: uniform
+    min: 0.05
+    max: 0.5
+  num_epochs:
+    values: [100, 200, 500, 1000, 2000, 5000, 10000]
+  optimizer:
+    values: ["adam", "adamw", "ranger", "sgd", "nag", "adabelief"]
+  downsampling_factor:
+    values: [1, 1.5, 2, 2.5]
+  target_shape:
+    values: [64, 128, 192]
+  augment:
+    values: [false, false]
+  loss_function:
+    values: ["bce", "dice", "bce_dice", "tversky"]
+  lr_scheduler:
+    values: ["none", "step", "plateau", "cosine"]
+  grad_accumulate_steps:
+    distribution: int_uniform
+    min: 1
+    max: 16  # Adjust maximum based on typical batch size to ensure effective training
+  grad_scaler_step_size:
+    distribution: int_uniform
+    min: 1
+    max: 10  # Modulate how often to apply scaler.step(), useful for deep experimentation
+
